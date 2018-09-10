@@ -9,17 +9,17 @@ var CHECKOUT_TIME = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
-// функция, возвращающая рандомный индекс массива
+
 var getRandomElement = function(arr) {
 return arr[Math.random() * arr.length]
 }
 
-// ф-ция случайного числа в заданном промежутке
+
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-var shuffleArray = function (array) { // ф-ция, которая мешает массив
+var shuffleArray = function (array) { 
   var arrayCopy = array.slice();
   var mixedArray = [];
   while (mixedArray.length < array.length) {
@@ -72,10 +72,10 @@ var offers = [];
 for (var i = 0; i < NUMBER_OF_OFFERS; i++) {
   offers.push(getOfferObject(i));
 }
-// убираю класс у блока
+
 document.querySelector('.map').classList.remove('map--faded');
 
-// создаю метку на карте
+
 var mapPins = document.querySelector('.map__pins');
 
 
@@ -95,7 +95,7 @@ var createButtonElement = function (object) {
   return newButtonElement;
 };
 
-// добиваюсь нужного мне количества меток при помощи ф-ции с циклом внутри, вставляю каждую во фрагмент и далее - в DOM
+
 var renderPins = function () {
   var documentFragment = document.createDocumentFragment();
   for (i = 0; i < offers.length; i++) {
@@ -104,11 +104,10 @@ var renderPins = function () {
   mapPins.appendChild(documentFragment);
 };
 
-//  dom-элемент объяления
+
 
 var offerCardTemplate = document.querySelector('template').content.querySelector('article.map__card');
 
-// ф-ция, проверяющая тип жилища
 var getTypeOfHouse = function (offerType) {
   var typeOfHouse;
   switch (offerType) {
@@ -126,23 +125,23 @@ var getTypeOfHouse = function (offerType) {
   }
   return typeOfHouse;
 };
-//  ф-ция манипуляций с фичами
+
 var getFeaturesArrayElement = function (featuresElement, offerFeaturesArray) {
 
-  // удаляю иконки из шаблона, которые идут по умолчанию
+
   var featureElement = featuresElement.querySelectorAll('.feature');
   for (i = 0; i <= 5; i++) {
     featuresElement.removeChild(featureElement[i]);
   }
-  // создаю фрагмент для <li>
+ 
   var documentFragment = document.createDocumentFragment();
   for (i = 0; i < offerFeaturesArray.length; i++) {
     var newFeatureElement = document.createElement('li');
     newFeatureElement.className = 'feature feature--' + offerFeaturesArray[i];
     documentFragment.appendChild(newFeatureElement);
   }
-  // добавляю <li> в нужный блок
-  featuresElement.appendChild(documentFragment);
+  
+  featuresElement.appendChild(documentFragment)
 };
 
 var renderOfferCard = function (object) {
@@ -150,20 +149,20 @@ var renderOfferCard = function (object) {
   authorOfferCardElement.querySelector('h3').textContent = object.offer.title;
   authorOfferCardElement.querySelector('small').textContent = object.offer.address;
   authorOfferCardElement.querySelector('.popup__price').innerHTML = object.offer.price + '&#x20bd;/ночь';
-  // в блок h4 вывожу тип жилья через вызов ф-ции типа дома
+
   authorOfferCardElement.querySelector('h4').textContent = getTypeOfHouse(object.offer.type);
   authorOfferCardElement.children[6].textContent = object.offer.rooms + ' комнаты для ' + object.offer.guests + ' гостей';
   authorOfferCardElement.children[7].textContent = 'Заезд после ' + object.offer.checkin + ' , выезд до ' + object.offer.checkout;
   authorOfferCardElement.children[9].textContent = object.offer.description;
 
-  // вызов ф-ции фич
+
   var featuresElement = authorOfferCardElement.querySelector('.popup__features');
   getFeaturesArrayElement(featuresElement, object.offer.features);
-  // удаляю строку <li> из шаблона
+
   var picturesElement = authorOfferCardElement.querySelector('.popup__pictures');
   var pictureElement = picturesElement.querySelector('li');
   picturesElement.removeChild(pictureElement);
-  // создаю фрагмент для <li> и вложенного в него <img>
+ 
   var documentFragment = document.createDocumentFragment();
   for (i = 0; i < offers[0].offer.photos.length; i++) {
     var newLiElementSecond = document.createElement('li');
@@ -174,7 +173,6 @@ var renderOfferCard = function (object) {
     newLiElementSecond.appendChild(newImgElementForLi);
     documentFragment.appendChild(newLiElementSecond);
   }
-  // вывожу фрагмент в нужный блок
   picturesElement.appendChild(documentFragment);
   authorOfferCardElement.querySelector('.popup__avatar').src = object.author.avatar;
   return authorOfferCardElement;
@@ -182,5 +180,4 @@ var renderOfferCard = function (object) {
 
 document.querySelector('.map').insertBefore(renderOfferCard(offers[0]), document.querySelector('.map__filters-container'));
 
-// вызываю ф-цию отрисовки меток
 renderPins();
