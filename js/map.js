@@ -73,3 +73,95 @@ for (var i = 0; i < NUMBER_OF_OFFERS; i++) {
 
 
 document.querySelector('.map').classList.remove('map--faded');
+
+var mapPins = document.querySelector('.map__pins');
+
+var createButtonElement = function (object) {
+  var newButtonElement = document.createElement('button');
+  newButtonElement.style.left = (object.location.x + 20) + 'px';
+  newButtonElement.style.top = (object.location.y + 40) + 'px';
+  newButtonElement.className = 'map__pin';
+
+  var newImgElement = document.createElement('img');
+  newImgElement.src = object.author.avatar;
+  newImgElement.width = 40;
+  newImgElement.height = 40;
+  newImgElement.draggable = false;
+
+  newButtonElement.appendChild(newImgElement);
+  return newButtonElement;
+};
+
+var renderPins = function () {
+  var documentFragment = document.createDocumentFragment();
+  for (i = 0; i < offers.length; i++) {
+    documentFragment.appendChild(createButtonElement(offers[i]));
+  }
+  mapPins.appendChild(documentFragment);
+};
+
+var offerCardTemplate = document.querySelector('template').content.querySelector('article.map__card');
+
+var getTypeOfHouse = function (offerType) {
+  var typeOfHouse;
+  switch (offerType) {
+    case 'flat':
+      typeOfHouse = 'Квартира';
+      break;
+
+    case 'bungalo':
+      typeOfHouse = 'Бунгало';
+      break;
+
+    case 'house':
+      typeOfHouse = 'Дом';
+      break;
+  }
+  return typeOfHouse;
+};
+
+var getFeaturesArrayElement = function (featuresElement, offerFeaturesArray) {
+
+  // удаляю иконки из шаблона, которые идут по умолчанию
+  var featureElement = featuresElement.querySelectorAll('.feature');
+  for (i = 0; i <= 5; i++) {
+    featuresElement.removeChild(featureElement[i]);
+  }
+  // создаю фрагмент для <li>
+  var documentFragment = document.createDocumentFragment();
+  for (i = 0; i < offerFeaturesArray.length; i++) {
+    var newFeatureElement = document.createElement('li');
+    newFeatureElement.className = 'feature feature--' + offerFeaturesArray[i];
+    documentFragment.appendChild(newFeatureElement);
+  }
+  // добавляю <li> в нужный блок
+  featuresElement.appendChild(documentFragment);
+};
+
+var featuresElement = authorOfferCardElement.querySelector('.popup__features');
+  getFeaturesArrayElement(featuresElement, object.offer.features);
+  // удаляю строку <li> из шаблона
+  var picturesElement = authorOfferCardElement.querySelector('.popup__pictures');
+  var pictureElement = picturesElement.querySelector('li');
+  picturesElement.removeChild(pictureElement);
+  // создаю фрагмент для <li> и вложенного в него <img>
+  var documentFragment = document.createDocumentFragment();
+  for (i = 0; i < offers[0].offer.photos.length; i++) {
+    var newLiElementSecond = document.createElement('li');
+    var newImgElementForLi = document.createElement('img');
+    newImgElementForLi.src = object.offer.photos[i];
+    newImgElementForLi.width = 70;
+    newImgElementForLi.height = 70;
+    newLiElementSecond.appendChild(newImgElementForLi);
+    documentFragment.appendChild(newLiElementSecond);
+  }
+  // вывожу фрагмент в нужный блок
+  picturesElement.appendChild(documentFragment);
+  authorOfferCardElement.querySelector('.popup__avatar').src = object.author.avatar;
+  return authorOfferCardElement;
+};
+
+document.querySelector('.map').insertBefore(renderOfferCard(offers[0]), document.querySelector('.map__filters-container'));
+
+// вызываю ф-цию отрисовки меток
+renderPins();
