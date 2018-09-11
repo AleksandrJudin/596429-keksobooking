@@ -96,8 +96,9 @@ var renderPins = function () {
 var offerCardTemplate = document.querySelector('template').content.querySelector('article.map__card');
 
 var namesMap = {
-  bungalo: 'Дом',
-  house: 'Бунгало'
+  flat: 'Квартира',
+  bungalo: 'Бунгало'
+  house: 'Дом'
 }
 
 var typeOfHouse = namesMap[offerType];
