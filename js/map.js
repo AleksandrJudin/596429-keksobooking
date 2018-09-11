@@ -11,24 +11,13 @@ var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.g
 
 
 var getRandomElement = function(arr) {
-return arr[Math.random() * arr.length]
+return arr[Math.ceil(Math.random() * arr.length)];
 }
 
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-var shuffleArray = function (array) { 
-  var arrayCopy = array.slice();
-  var mixedArray = [];
-  while (mixedArray.length < array.length) {
-    var randomIndex = getRandomElement(arrayCopy.length);
-    mixedArray.push(arrayCopy[randomIndex]);
-    arrayCopy.splice(randomIndex, 1);
-  }
-  return mixedArray;
-};
 
 var getOfferObject = function (index) {
   var titlesArrayCopy = TITLES.slice();
