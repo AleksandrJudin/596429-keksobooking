@@ -93,27 +93,14 @@ var renderPins = function () {
   mapPins.appendChild(documentFragment);
 };
 
-
-
 var offerCardTemplate = document.querySelector('template').content.querySelector('article.map__card');
 
-var getTypeOfHouse = function (offerType) {
-  var typeOfHouse;
-  switch (offerType) {
-    case 'flat':
-      typeOfHouse = 'Квартира';
-      break;
+var namesMap = {
+  bungalo: 'Дом',
+  house: 'Бунгало'
+}
 
-    case 'bungalo':
-      typeOfHouse = 'Бунгало';
-      break;
-
-    case 'house':
-      typeOfHouse = 'Дом';
-      break;
-  }
-  return typeOfHouse;
-};
+var typeOfHouse = namesMap[offerType];
 
 var getFeaturesArrayElement = function (featuresElement, offerFeaturesArray) {
 
@@ -139,7 +126,7 @@ var renderOfferCard = function (object) {
   authorOfferCardElement.querySelector('small').textContent = object.offer.address;
   authorOfferCardElement.querySelector('.popup__price').innerHTML = object.offer.price + '&#x20bd;/ночь';
 
-  authorOfferCardElement.querySelector('h4').textContent = getTypeOfHouse(object.offer.type);
+  authorOfferCardElement.querySelector('h4').textContent = typeOfHouse(object.offer.type);
   authorOfferCardElement.children[6].textContent = object.offer.rooms + ' комнаты для ' + object.offer.guests + ' гостей';
   authorOfferCardElement.children[7].textContent = 'Заезд после ' + object.offer.checkin + ' , выезд до ' + object.offer.checkout;
   authorOfferCardElement.children[9].textContent = object.offer.description;
