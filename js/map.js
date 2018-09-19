@@ -127,19 +127,10 @@ var deleteCard = function (someCard) {
   }
 };
 
-var translateType = function (type) {
-  switch (type) {
-    case 'flat':
-      return 'Квартира';
-    case 'bungalo':
-      return 'Бунгало';
-    case 'house':
-      return 'Дом';
-    case 'palace':
-      return 'Дворец';
-    default:
-      return type;
-  }
+var translateType = {
+  flat: 'Квартира',
+  bungalo: 'Бунгало',
+  house: 'Дом'
 };
 
 var pin = document.querySelector('.map__pin');
