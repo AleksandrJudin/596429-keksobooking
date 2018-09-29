@@ -12,6 +12,7 @@
   pinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
+
     if (!window.active) {
       return;
     }
