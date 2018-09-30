@@ -1,4 +1,5 @@
 'use strict';
+
 (function () {
   window.active = false;
 
@@ -50,7 +51,7 @@
     if (someCard) {
       someCard.remove();
     }
-  };
+};
 
   var translateType = {
     flat: 'Квартира',
