@@ -10,16 +10,8 @@
       adElement.querySelector('.popup__text--address').textContent = advertisement.offer.address;
       adElement.querySelector('.popup__text--price').textContent = advertisement.offer.price + '₽/ночь';
 
-      var adType = '';
-      if (advertisement.offer.type === 'flat') {
-        adType = 'Квартира';
-      } else if (advertisement.offer.type === 'bungalo') {
-        adType = 'Бунгало';
-      } else if (advertisement.offer.type === 'house') {
-        adType = 'Дом';
-      } else {
-        adType = 'Дворец';
-      }
+      var adType = Types[advertisement.offer.type].name;
+    
       adElement.querySelector('.popup__type').textContent = adType;
 
       adElement.querySelector('.popup__text--capacity').textContent = advertisement.offer.rooms + ' комнаты для ' + advertisement.offer.guests + ' гостей';
