@@ -11,9 +11,7 @@
       adElement.querySelector('.popup__text--price').textContent = advertisement.offer.price + '₽/ночь';
 
       var adType = Types[advertisement.offer.type].name;
-    
       adElement.querySelector('.popup__type').textContent = adType;
-
       adElement.querySelector('.popup__text--capacity').textContent = advertisement.offer.rooms + ' комнаты для ' + advertisement.offer.guests + ' гостей';
       adElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + advertisement.offer.checkin + ' , выезд до ' + advertisement.offer.checkout;
 
