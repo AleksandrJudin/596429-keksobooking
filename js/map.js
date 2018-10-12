@@ -18,7 +18,7 @@
       y: evt.clientY
     };
 
-    var onMouseMove = function (moveEvt) {
+    var hundlerMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
 
       var shift = {
@@ -49,17 +49,17 @@
       window.util.setAddress();
     };
 
-    var onMouseUp = function (upEvt) {
+    var hundlerMouseUp = function (upEvt) {
       upEvt.preventDefault();
       window.util.setAddress();
       if (!document.querySelector('.map:not(.map--faded)')) {
         window.state.activatePage();
       }
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mousemove', hundlerMouseMove);
+      document.removeEventListener('mouseup', hundlerMouseUp);
     };
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mousemove', hundlerMouseMove);
+    document.addEventListener('mouseup', hundlerMouseUp);
   });
 })();
